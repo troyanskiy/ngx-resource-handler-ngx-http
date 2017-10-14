@@ -1,6 +1,6 @@
 {
   "name": "rest-ngx",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Rest Angular",
   "scripts": {
     "clean": "rimraf dist",
@@ -9,7 +9,7 @@
     "build.full": "npm run build && cp README.md ./dist/README.md && cp package.json ./dist/package.json"
   },
   "dependencies": {
-    "rest-core": "0.0.3"
+    "rest-core": "^0.0.6"
   },
   "keywords": [
     "rest",
