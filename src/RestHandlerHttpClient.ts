@@ -1,24 +1,18 @@
-import { IRestRequest, IRestResponse, RestHandler, RestRequestMethod, RestResponseBodyType } from 'rest-core';
+import { IRestRequest, IRestResponse, RestRequestMethod, RestResponseBodyType } from 'rest-core';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams, HttpRequest, HttpResponse } from '@angular/common/http';
-
-import 'rxjs/add/operator/toPromise';
+import { RestHandlerAbstract } from './RestHandlerAbstract';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class RestHandlerHttpClient extends RestHandler {
+export class RestHandlerHttpClient extends RestHandlerAbstract {
 
   constructor(private http: HttpClient) {
     super();
   }
 
-  handle(req: IRestRequest): Promise<IRestResponse> {
-
-    const request = this.prepareRequest(req);
-
-    return this.http.request(request)
-      .toPromise()
-      .then((resp: HttpResponse<any>) => this.handleResponse(req, resp));
-
+  protected request(request: any): Observable<any> {
+    return this.http.request(request);
   }
 
   protected prepareRequest(req: IRestRequest): HttpRequest<any> {
@@ -98,6 +92,17 @@ export class RestHandlerHttpClient extends RestHandler {
 
   protected handleResponse(req: IRestRequest, response: HttpResponse<any>): IRestResponse {
 
+    const headers: any = {};
+    const keys = response.headers.keys();
+    keys.forEach((key: string) => {
+      headers[key] = response.headers.getAll(key);
+    });
+
+    return {
+      status: response.status,
+      body: response.body,
+      headers: headers
+    };
   }
 
 }
@@ -106,6 +111,6 @@ export class RestHandlerHttpClient extends RestHandler {
 export interface IHttpRequestInit {
   headers?: HttpHeaders;
   params?: HttpParams;
-  responseType?: 'arraybuffer'|'blob'|'json'|'text';
+  responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
   withCredentials?: boolean;
 }

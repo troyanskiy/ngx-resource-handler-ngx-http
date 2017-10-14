@@ -14,14 +14,10 @@
   },
   "files": [
     "index.ts",
-    "rest-core.ts",
-    "src/Declarations.ts",
-    "src/Rest.ts",
-    "src/RestAction.ts",
-    "src/RestGlobalConfig.ts",
-    "src/RestHandler.ts",
-    "src/RestHelper.ts",
-    "src/RestParams.ts"
+    "rest-ngx.ts",
+    "src/RestHandlerAbstract.ts",
+    "src/RestHandlerHttp.ts",
+    "src/RestHandlerHttpClient.ts"
   ],
   "exclude": [
     "node_modules",

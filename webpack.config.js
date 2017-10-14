@@ -6,12 +6,7 @@ const helpers = require('./config/helpers'),
     webpack = require('webpack'),
     CleanWebpackPlugin = require('clean-webpack-plugin');
 
-/**
- * Webpack Plugins
- */
-const ProvidePlugin = require('webpack/lib/ProvidePlugin');
-const DefinePlugin = require('webpack/lib/DefinePlugin');
-const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
+
 
 module.exports = {
     devtool: 'inline-source-map',
@@ -25,13 +20,13 @@ module.exports = {
     output: {
         path: helpers.root('dist/bundles'),
         publicPath: '/',
-        filename: 'core.umd.js',
-        library: 'ngx-translate-core',
+        filename: 'ngx.umd.js',
+        library: 'rest-ngx',
         libraryTarget: 'umd'
     },
 
     // require those dependencies but don't bundle them
-    // externals: [/^\@angular\//, /^rxjs\//],
+    externals: [/^\@angular\//, /^rxjs\//, /^rest\-core/],
 
     module: {
         rules: [{

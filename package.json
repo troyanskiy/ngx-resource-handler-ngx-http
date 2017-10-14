@@ -2,21 +2,51 @@
   "name": "rest-ngx",
   "version": "0.0.1",
   "description": "Rest Angular",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rimraf dist",
+    "lint": "tslint --config tslint.json --project tsconfig.json --type-check --format stylish",
+    "build": "npm run clean && npm run lint && ngc && webpack",
+    "build.full": "npm run build && cp README.md ./dist/README.md && cp package.json ./dist/package.json"
   },
+  "dependencies": {
+    "rest-core": "0.0.3"
+  },
+  "keywords": [
+    "rest",
+    "rest-core",
+    "rest-ngx",
+    "ngx-resource",
+    "ngx-resource-rest",
+    "ng2-resource",
+    "ng2-resource-rest",
+    "ng2",
+    "ng2-rest",
+    "Angular2",
+    "Resource"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/troyanskiy/rest-ngx.git"
+  },
+  "main": "bundles/rest-ngx.umd.js",
+  "module": "index.js",
+  "typings": "index.d.ts",
   "author": "Roman Rosluk <roma@redbox.by>",
   "license": "MIT",
-  "dependencies": {
-    "rest-core": "0.0.2"
+  "bugs": {
+    "url": "https://github.com/troyanskiy/rest-ngx/issues"
   },
   "devDependencies": {
     "@angular/common": "^4.4.4",
+    "@angular/compiler": "^4.4.4",
+    "@angular/compiler-cli": "^4.4.4",
     "@angular/core": "^4.4.4",
     "@angular/http": "^4.4.4",
     "@angular/platform-browser": "^4.4.4",
     "@types/node": "^8.0.34",
+    "awesome-typescript-loader": "^3.2.3",
+    "clean-webpack-plugin": "^0.1.17",
+    "rimraf": "^2.6.2",
     "rxjs": "^5.4.3",
     "tslint": "^5.7.0",
     "typescript": "^2.5.3",
