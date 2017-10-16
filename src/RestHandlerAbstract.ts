@@ -11,29 +11,31 @@ export abstract class RestHandlerAbstract extends RestHandler {
     const request = this.prepareRequest(req);
 
     const resp: IRestHandlerResponse = {
-      promise: new Promise((resolve, reject) => {
-
-        let subscription = this.request(request)
-          .subscribe(
-            (resp: any) => {
-              subscription = null;
-              resolve(this.handleResponse(req, resp));
-            },
-            (err: any) => {
-              subscription = null;
-              reject(this.handleResponse(req, err));
-            }
-          );
-
-        resp.abort = () => {
-          if (subscription) {
-            subscription.unsubscribe();
-            subscription = null;
-          }
-        };
-
-      })
+      promise: null
     };
+
+    resp.promise = new Promise((resolve, reject) => {
+
+      let subscription = this.request(request)
+        .subscribe(
+          (resp: any) => {
+            subscription = null;
+            resolve(this.handleResponse(req, resp));
+          },
+          (err: any) => {
+            subscription = null;
+            reject(this.handleResponse(req, err));
+          }
+        );
+
+      resp.abort = () => {
+        if (subscription) {
+          subscription.unsubscribe();
+          subscription = null;
+        }
+      };
+
+    });
 
     return resp;
 

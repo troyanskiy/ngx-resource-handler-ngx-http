@@ -1,8 +1,10 @@
 import { IRestRequest, IRestResponse, RestRequestMethod, RestResponseBodyType } from 'rest-core';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams, HttpRequest, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpEventType, HttpHeaders, HttpParams, HttpRequest, HttpResponse } from '@angular/common/http';
 import { RestHandlerAbstract } from './RestHandlerAbstract';
 import { Observable } from 'rxjs/Observable';
+
+import 'rxjs/add/operator/filter';
 
 @Injectable()
 export class RestHandlerHttpClient extends RestHandlerAbstract {
@@ -12,7 +14,8 @@ export class RestHandlerHttpClient extends RestHandlerAbstract {
   }
 
   protected request(request: any): Observable<any> {
-    return this.http.request(request);
+    return this.http.request(request)
+      .filter((resp: HttpResponse<any>) => resp.type === HttpEventType.Response);
   }
 
   protected prepareRequest(req: IRestRequest): HttpRequest<any> {
@@ -81,7 +84,7 @@ export class RestHandlerHttpClient extends RestHandlerAbstract {
       init.params = new HttpParams();
       for (const key in req.query) {
         if (req.query.hasOwnProperty(key)) {
-          init.params.append(key, req.query[key]);
+          init.params = init.params.set(key, req.query[key]);
         }
       }
     }

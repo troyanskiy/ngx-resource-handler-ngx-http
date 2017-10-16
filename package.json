@@ -1,6 +1,6 @@
 {
   "name": "rest-ngx",
-  "version": "0.0.2",
+  "version": "0.0.6",
   "description": "Rest Angular",
   "scripts": {
     "clean": "rimraf dist",
