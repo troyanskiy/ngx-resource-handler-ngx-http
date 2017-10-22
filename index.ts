@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { RestHandler } from 'rest-core';
 import { RestHandlerHttpClient } from './src/RestHandlerHttpClient';
 
-export * from './src/RestHandlerHttp';
+// export * from './src/RestHandlerHttp';
 export * from './src/RestHandlerHttpClient';
 
 export interface IRestModuleConfig {

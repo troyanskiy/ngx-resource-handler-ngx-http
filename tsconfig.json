@@ -16,7 +16,6 @@
     "index.ts",
     "rest-ngx.ts",
     "src/RestHandlerAbstract.ts",
-    "src/RestHandlerHttp.ts",
     "src/RestHandlerHttpClient.ts"
   ],
   "exclude": [
