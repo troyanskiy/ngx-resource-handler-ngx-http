@@ -37,3 +37,5 @@ export function myHandlerFactory(http: HttpClient) {
 export class AppModule {
 }
 ```
+
+## [Docs about rest-core](https://github.com/troyanskiy/rest-core/blob/master/README.md)
