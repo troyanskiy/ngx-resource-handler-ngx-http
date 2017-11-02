@@ -15,7 +15,7 @@ export class RestHandlerHttpClient extends RestHandlerAbstract {
 
   protected request(request: any): Observable<any> {
     return this.http.request(request)
-      .filter((resp: HttpResponse<any>) => resp.type === HttpEventType.Response);
+      .filter((resp: HttpResponse<object>) => resp.type === HttpEventType.Response);
   }
 
   protected prepareRequest(req: IRestRequest): HttpRequest<any> {
