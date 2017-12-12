@@ -14,9 +14,9 @@
   },
   "files": [
     "index.ts",
-    "rest-ngx.ts",
-    "src/RestHandlerAbstract.ts",
-    "src/RestHandlerHttpClient.ts"
+    "ngx-http.ts",
+    "src/ResourceHandlerAbstract.ts",
+    "src/ResourceHandlerHttpClient.ts"
   ],
   "exclude": [
     "node_modules",

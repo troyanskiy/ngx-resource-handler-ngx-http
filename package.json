@@ -1,7 +1,7 @@
 {
-  "name": "rest-ngx",
-  "version": "0.1.1",
-  "description": "Rest Angular",
+  "name": "@ngx-resource/handler-ngx-http",
+  "version": "0.9.0",
+  "description": "Resource handler for angular",
   "scripts": {
     "clean": "rimraf dist",
     "lint": "tslint --config tslint.json --project tsconfig.json --type-check --format stylish",
@@ -9,11 +9,11 @@
     "build.full": "npm run build && cp README.md ./dist/README.md && cp package.json ./dist/package.json"
   },
   "keywords": [
-    "rest",
-    "rest-core",
-    "rest-ngx",
     "ngx-resource",
     "ngx-resource-rest",
+    "ngx-resource-handler",
+    "ngx-resource-handler-ngx-http",
+    "ngx-resource-handler-http",
     "ng2-resource",
     "ng2-resource-rest",
     "ng2",
@@ -23,15 +23,15 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/troyanskiy/rest-ngx.git"
+    "url": "git+https://github.com/troyanskiy/ngx-resource-handler-ngx-http.git"
   },
-  "main": "bundles/rest-ngx.umd.js",
+  "main": "bundles/ngx-http.umd.js",
   "module": "index.js",
   "typings": "index.d.ts",
   "author": "Roman Rosluk <roma@redbox.by>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/troyanskiy/rest-ngx/issues"
+    "url": "https://github.com/troyanskiy/ngx-resource-handler-ngx-http/issues"
   },
   "devDependencies": {
     "@angular/common": "^4.4.4",
@@ -40,6 +40,7 @@
     "@angular/core": "^4.4.4",
     "@angular/http": "^4.4.4",
     "@angular/platform-browser": "^4.4.4",
+    "@ngx-resource/core": "^0.9.4",
     "@types/node": "^8.0.34",
     "awesome-typescript-loader": "^3.2.3",
     "clean-webpack-plugin": "^0.1.17",

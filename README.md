@@ -1,10 +1,10 @@
-# rest-ngx
+# @ngx-resource/handler-ngx-http
 
-It's implementation of `RestHandler` which uses Angular `HttpClient`
+It's implementation of `ResourceHandler` which uses Angular `HttpClient`
 
 ## How to install and setup it
 ```bash
-& npm i --save rest-core rest-ngx
+& npm i --save @ngx-resource/core @ngx-resource/handler-ngx-http
 ```
 
 In you app module
@@ -12,7 +12,7 @@ In you app module
 
 // AoT requires an exported function for factories
 export function myHandlerFactory(http: HttpClient) {
-    return new MyRestHandler(http);
+    return new MyResourceHandler(http);
 }
 
 @NgModule({
@@ -21,12 +21,12 @@ export function myHandlerFactory(http: HttpClient) {
     BrowserAnimationsModule,
     HttpClientModule,
 
-    // Default RestHandler uses class `RestHandlerHttpClient`
-    RestModule.forRoot()
+    // Default ResourceHandler uses class `ResourceHandlerHttpClient`
+    ResourceModule.forRoot()
     
     // Or set you own handler
-    //RestModule.forRoot({
-    //  handler: { provide: RestHandler, useFactory: (myHandlerFactory), deps: [HttpClient] }
+    //ResourceModule.forRoot({
+    //  handler: { provide: ResourceHandler, useFactory: (myHandlerFactory), deps: [HttpClient] }
     //})
   ],
   declarations: [...],

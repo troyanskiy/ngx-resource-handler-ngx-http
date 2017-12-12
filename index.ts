@@ -1,41 +1,41 @@
 import { ModuleWithProviders, NgModule, Provider } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { RestHandler } from 'rest-core';
-import { RestHandlerHttpClient } from './src/RestHandlerHttpClient';
+import { ResourceHandler } from '@ngx-resource/core';
+import { ResourceHandlerHttpClient } from './src/ResourceHandlerHttpClient';
 
-export * from './src/RestHandlerHttpClient';
+export * from './src/ResourceHandlerHttpClient';
 
-export interface IRestModuleConfig {
+export interface IResourceModuleConfig {
   handler?: Provider;
 }
 
 @NgModule()
-export class RestModule {
+export class ResourceModule {
 
   /**
    * For root
-   * @param {IRestModuleConfig} config
+   * @param {IResourceModuleConfig} config
    * @return {ModuleWithProviders}
    */
-  static forRoot(config: IRestModuleConfig = {}): ModuleWithProviders {
+  static forRoot(config: IResourceModuleConfig = {}): ModuleWithProviders {
     return {
-      ngModule: RestModule,
+      ngModule: ResourceModule,
       providers: [
-        config.handler || {provide: RestHandler, useClass: RestHandlerHttpClient, deps: [HttpClient]}
+        config.handler || {provide: ResourceHandler, useClass: ResourceHandlerHttpClient, deps: [HttpClient]}
       ]
     };
   }
 
   /**
    * For child
-   * @param {IRestModuleConfig} config
+   * @param {IResourceModuleConfig} config
    * @return {ModuleWithProviders}
    */
-  static forChild(config: IRestModuleConfig = {}): ModuleWithProviders {
+  static forChild(config: IResourceModuleConfig = {}): ModuleWithProviders {
     return {
-      ngModule: RestModule,
+      ngModule: ResourceModule,
       providers: [
-        config.handler || {provide: RestHandler, useClass: RestHandlerHttpClient, deps: [HttpClient]}
+        config.handler || {provide: ResourceHandler, useClass: ResourceHandlerHttpClient, deps: [HttpClient]}
       ]
     };
   }

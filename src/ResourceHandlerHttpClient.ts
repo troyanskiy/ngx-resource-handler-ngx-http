@@ -1,13 +1,17 @@
-import { IRestRequest, IRestResponse, RestRequestMethod, RestResponseBodyType } from 'rest-core';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEventType, HttpHeaders, HttpParams, HttpRequest, HttpResponse } from '@angular/common/http';
-import { RestHandlerAbstract } from './RestHandlerAbstract';
 import { Observable } from 'rxjs/Observable';
+import {
+  IResourceRequest, IResourceResponse, ResourceRequestMethod,
+  ResourceResponseBodyType
+} from '@ngx-resource/core';
+
+import { ResourceHandlerAbstract } from './ResourceHandlerAbstract';
 
 import 'rxjs/add/operator/filter';
 
 @Injectable()
-export class RestHandlerHttpClient extends RestHandlerAbstract {
+export class ResourceHandlerHttpClient extends ResourceHandlerAbstract {
 
   constructor(private http: HttpClient) {
     super();
@@ -18,37 +22,37 @@ export class RestHandlerHttpClient extends RestHandlerAbstract {
       .filter((resp: HttpResponse<object>) => resp.type === HttpEventType.Response);
   }
 
-  protected prepareRequest(req: IRestRequest): HttpRequest<any> {
+  protected prepareRequest(req: IResourceRequest): HttpRequest<any> {
 
     let method: string = 'GET';
 
     switch (req.method) {
 
-      case RestRequestMethod.Get:
+      case ResourceRequestMethod.Get:
         method = 'GET';
         break;
 
-      case RestRequestMethod.Post:
+      case ResourceRequestMethod.Post:
         method = 'POST';
         break;
 
-      case RestRequestMethod.Put:
+      case ResourceRequestMethod.Put:
         method = 'PUT';
         break;
 
-      case RestRequestMethod.Delete:
+      case ResourceRequestMethod.Delete:
         method = 'DELETE';
         break;
 
-      case RestRequestMethod.Head:
+      case ResourceRequestMethod.Head:
         method = 'HEAD';
         break;
 
-      case RestRequestMethod.Options:
+      case ResourceRequestMethod.Options:
         method = 'OPTIONS';
         break;
 
-      case RestRequestMethod.Patch:
+      case ResourceRequestMethod.Patch:
         method = 'PATCH';
 
     }
@@ -59,15 +63,15 @@ export class RestHandlerHttpClient extends RestHandlerAbstract {
 
     switch (req.responseBodyType) {
 
-      case RestResponseBodyType.Json:
+      case ResourceResponseBodyType.Json:
         init.responseType = 'json';
         break;
 
-      case RestResponseBodyType.ArrayBuffer:
+      case ResourceResponseBodyType.ArrayBuffer:
         init.responseType = 'arraybuffer';
         break;
 
-      case RestResponseBodyType.Blob:
+      case ResourceResponseBodyType.Blob:
         init.responseType = 'blob';
         break;
 
@@ -93,7 +97,7 @@ export class RestHandlerHttpClient extends RestHandlerAbstract {
 
   }
 
-  protected handleResponse(req: IRestRequest, response: HttpResponse<any>): IRestResponse {
+  protected handleResponse(req: IResourceRequest, response: HttpResponse<any>): IResourceResponse {
 
     const headers: any = {};
     const keys = response.headers.keys();

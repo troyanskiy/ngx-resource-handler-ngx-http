@@ -1,16 +1,16 @@
-import { IRestHandlerResponse, IRestRequest, IRestResponse, RestHandler } from 'rest-core';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { IResourceHandlerResponse, IResourceRequest, IResourceResponse, ResourceHandler } from '@ngx-resource/core';
 
 @Injectable()
-export abstract class RestHandlerAbstract extends RestHandler {
+export abstract class ResourceHandlerAbstract extends ResourceHandler {
 
 
-  handle(req: IRestRequest): IRestHandlerResponse {
+  handle(req: IResourceRequest): IResourceHandlerResponse {
 
     const request = this.prepareRequest(req);
 
-    const resp: IRestHandlerResponse = {
+    const resp: IResourceHandlerResponse = {
       promise: null
     };
 
@@ -43,9 +43,9 @@ export abstract class RestHandlerAbstract extends RestHandler {
 
   protected abstract request(request: any): Observable<any>;
 
-  protected abstract prepareRequest(req: IRestRequest): any;
+  protected abstract prepareRequest(req: IResourceRequest): any;
 
-  protected abstract handleResponse(req: IRestRequest, response: any): IRestResponse;
+  protected abstract handleResponse(req: IResourceRequest, response: any): IResourceResponse;
 
 }
 
