@@ -38,4 +38,4 @@ export class AppModule {
 }
 ```
 
-## [Docs about rest-core](https://github.com/troyanskiy/rest-core/blob/master/README.md)
+## [Docs about @ngx-resource/core](https://github.com/troyanskiy/ngx-resource-core/blob/master/README.md)
