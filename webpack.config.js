@@ -20,8 +20,8 @@ module.exports = {
     output: {
         path: helpers.root('dist/bundles'),
         publicPath: '/',
-        filename: 'rest-ngx.umd.js',
-        library: 'rest-ngx',
+        filename: 'handler-ngx-http.umd.js',
+        library: 'ngx-resource-handler-ngx-http',
         libraryTarget: 'umd'
     },
 
