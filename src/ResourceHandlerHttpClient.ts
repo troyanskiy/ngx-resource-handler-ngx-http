@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpEventType, HttpHeaders, HttpParams, HttpRequest, HttpResponse } from '@angular/common/http';
+import {
+  HttpClient, HttpErrorResponse, HttpEventType, HttpHeaders, HttpParams, HttpRequest,
+  HttpResponse
+} from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import {
   IResourceRequest, IResourceResponse, ResourceRequestMethod,
@@ -97,7 +100,7 @@ export class ResourceHandlerHttpClient extends ResourceHandlerAbstract {
 
   }
 
-  protected handleResponse(req: IResourceRequest, response: HttpResponse<any>): IResourceResponse {
+  protected handleResponse(req: IResourceRequest, response: HttpResponse<any> | HttpErrorResponse): IResourceResponse {
 
     const headers: any = {};
     const keys = response.headers.keys();
@@ -107,7 +110,7 @@ export class ResourceHandlerHttpClient extends ResourceHandlerAbstract {
 
     return {
       status: response.status,
-      body: response.body,
+      body: (response as HttpResponse<any>).body || (response as HttpErrorResponse).error,
       headers: headers
     };
   }
