@@ -1,51 +1,42 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { IResourceHandlerResponse, IResourceRequest, IResourceResponse, ResourceHandler } from '@ngx-resource/core';
 
 @Injectable()
 export abstract class ResourceHandlerAbstract extends ResourceHandler {
+    handle(req: IResourceRequest): IResourceHandlerResponse {
+        const request = this.prepareRequest(req);
 
+        const resp: IResourceHandlerResponse = {
+            promise: null,
+        };
 
-  handle(req: IResourceRequest): IResourceHandlerResponse {
+        resp.promise = new Promise((resolve, reject) => {
+            let subscription = this.request(request).subscribe(
+                (resp: any) => {
+                    subscription = null;
+                    resolve(this.handleResponse(req, resp));
+                },
+                (err: any) => {
+                    subscription = null;
+                    reject(this.handleResponse(req, err));
+                },
+            );
 
-    const request = this.prepareRequest(req);
+            resp.abort = () => {
+                if (subscription) {
+                    subscription.unsubscribe();
+                    subscription = null;
+                }
+            };
+        });
 
-    const resp: IResourceHandlerResponse = {
-      promise: null
-    };
+        return resp;
+    }
 
-    resp.promise = new Promise((resolve, reject) => {
+    protected abstract request(request: any): Observable<any>;
 
-      let subscription = this.request(request)
-        .subscribe(
-          (resp: any) => {
-            subscription = null;
-            resolve(this.handleResponse(req, resp));
-          },
-          (err: any) => {
-            subscription = null;
-            reject(this.handleResponse(req, err));
-          }
-        );
+    protected abstract prepareRequest(req: IResourceRequest): any;
 
-      resp.abort = () => {
-        if (subscription) {
-          subscription.unsubscribe();
-          subscription = null;
-        }
-      };
-
-    });
-
-    return resp;
-
-  }
-
-  protected abstract request(request: any): Observable<any>;
-
-  protected abstract prepareRequest(req: IResourceRequest): any;
-
-  protected abstract handleResponse(req: IResourceRequest, response: any): IResourceResponse;
-
+    protected abstract handleResponse(req: IResourceRequest, response: any): IResourceResponse;
 }
-
