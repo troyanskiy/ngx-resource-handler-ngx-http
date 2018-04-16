@@ -1,17 +1,23 @@
 import { Injectable } from '@angular/core';
 import {
-  HttpClient, HttpErrorResponse, HttpEventType, HttpHeaders, HttpParams, HttpRequest,
+  HttpClient,
+  HttpErrorResponse,
+  HttpEventType,
+  HttpHeaders,
+  HttpParams,
+  HttpRequest,
   HttpResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import {
-  IResourceRequest, IResourceResponse, ResourceRequestMethod,
+  IResourceRequest,
+  IResourceResponse,
+  ResourceRequestMethod,
   ResourceResponseBodyType
 } from '@ngx-resource/core';
 
 import { ResourceHandlerAbstract } from './ResourceHandlerAbstract';
-
-import 'rxjs/add/operator/filter';
 
 @Injectable()
 export class ResourceHandlerHttpClient extends ResourceHandlerAbstract {
@@ -21,8 +27,9 @@ export class ResourceHandlerHttpClient extends ResourceHandlerAbstract {
   }
 
   protected request(request: any): Observable<any> {
-    return this.http.request(request)
-      .filter((resp: HttpResponse<object>) => resp.type === HttpEventType.Response);
+    return this.http
+      .request(request)
+      .pipe(filter((resp: HttpResponse<object>) => resp.type === HttpEventType.Response));
   }
 
   protected prepareRequest(req: IResourceRequest): HttpRequest<any> {

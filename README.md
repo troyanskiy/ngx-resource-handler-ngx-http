@@ -2,6 +2,8 @@
 
 It's implementation of `ResourceHandler` which uses Angular `HttpClient`
 
+# If you are using Angular 5, please use @ngx-resource/handler-ngx-http 5.x
+
 ## How to install and setup it
 ```bash
 & npm i --save @ngx-resource/core @ngx-resource/handler-ngx-http
