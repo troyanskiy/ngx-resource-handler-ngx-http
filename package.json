@@ -1,6 +1,6 @@
 {
   "name": "@ngx-resource/handler-ngx-http",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "description": "Resource handler for angular",
   "scripts": {
     "clean": "rimraf dist",
