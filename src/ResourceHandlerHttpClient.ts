@@ -95,12 +95,7 @@ export class ResourceHandlerHttpClient extends ResourceHandlerAbstract {
     }
 
     if (req.query) {
-      init.params = new HttpParams();
-      for (const key in req.query) {
-        if (req.query.hasOwnProperty(key)) {
-          init.params = init.params.set(key, req.query[key]);
-        }
-      }
+      init.params = new HttpParams({fromObject: req.query});
     }
 
     return new HttpRequest(method, req.url, req.body, init);
