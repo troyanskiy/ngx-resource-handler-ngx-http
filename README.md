@@ -1,5 +1,7 @@
 # @ngx-resource/handler-ngx-http
 
+Repository is moved to https://github.com/troyanskiy/ngx-resource
+
 It's implementation of `ResourceHandler` which uses Angular `HttpClient`
 
 # If you are using Angular 5, please use @ngx-resource/handler-ngx-http 5.x
